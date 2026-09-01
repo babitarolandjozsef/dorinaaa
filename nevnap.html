@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dorinának ❤️</title>
+
+    <style>
+        .final-photo {
+            display: block;
+            width: 300px;
+            max-width: 90%;
+            margin: 30px auto 10px;
+            border-radius: 20px;
+        }
+
+        #belépés {
+            position: fixed;
+            inset: 0;
+            background: #080812;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        #belépés button {
+            padding: 18px 35px;
+            border: none;
+            border-radius: 50px;
+            background: #d85f99;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background: #080812;
+            color: white;
+            overflow-x: hidden;
+        }
+
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                radial-gradient(white 1px, transparent 1px),
+                radial-gradient(rgba(255, 255, 255, .7) 1px, transparent 1px);
+            background-size: 90px 90px, 140px 140px;
+            background-position: 0 0, 40px 60px;
+            opacity: .25;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .glow {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: rgba(180, 70, 130, .15);
+            filter: blur(100px);
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 70px 20px;
+            text-align: center;
+        }
+
+
+        .hero {
+            position: relative;
+            flex-direction: column;
+        }
+
+        .small {
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-size: 12px;
+            opacity: .6;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: clamp(60px, 15vw, 150px);
+            font-weight: normal;
+            letter-spacing: 8px;
+            background: linear-gradient(90deg, #fff, #f4a8d0, #fff);
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: shine 4s infinite;
+        }
+
+        @keyframes shine {
+
+            0%,
+            100% {
+                filter: brightness(1);
+            }
+
+            50% {
+                filter: brightness(1.5);
+            }
+        }
+
+        .subtitle {
+            margin-top: 25px;
+            font-size: clamp(18px, 4vw, 27px);
+            color: #f4b4d6;
+        }
+
+        .scroll {
+            position: absolute;
+            bottom: 30px;
+            font-size: 13px;
+            opacity: .5;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            50% {
+                transform: translateY(8px);
+            }
+        }
+
+
+
+        .content {
+            width: min(900px, 100%);
+        }
+
+        .section-title {
+            font-size: clamp(35px, 7vw, 65px);
+            font-weight: normal;
+            margin-bottom: 50px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            padding: 35px 25px;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            transition: .4s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, .08);
+            border-color: rgba(244, 168, 208, .5);
+        }
+
+        .emoji {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            color: #f4a8d0;
+            margin-bottom: 12px;
+            font-size: 22px;
+        }
+
+        .card p {
+            line-height: 1.7;
+            color: #ddd;
+        }
+
+
+
+        .photos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .photo {
+            height: 260px;
+            border-radius: 25px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #261525, #11111d);
+            border: 1px solid rgba(255, 255, 255, .1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, .5);
+            font-size: 15px;
+            padding: 20px;
+        }
+
+        .photo:first-child {
+            height: 350px;
+            grid-row: span 2;
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+
+        .letter {
+            max-width: 720px;
+            background: #fff8fb;
+            color: #2a1822;
+            padding: clamp(30px, 7vw, 65px);
+            border-radius: 5px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, .4);
+            transform: rotate(-1deg);
+            text-align: left;
+            position: relative;
+        }
+
+        .letter::before {
+            content: "♥";
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: #d86b9d;
+            font-size: 25px;
+        }
+
+        .letter h2 {
+            font-weight: normal;
+            margin-bottom: 30px;
+            font-size: 35px;
+        }
+
+        .letter p {
+            font-size: 18px;
+            line-height: 1.9;
+            margin-bottom: 18px;
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 35px;
+            font-size: 22px;
+            color: #a94d78;
+        }
+
+
+
+        .surprise {
+            flex-direction: column;
+        }
+
+        .surprise button {
+            border: none;
+            background: linear-gradient(135deg, #d85f99, #9c4778);
+            color: white;
+            padding: 20px 35px;
+            border-radius: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 10px 35px rgba(216, 95, 153, .3);
+            transition: .3s;
+        }
+
+        .surprise button:hover {
+            transform: scale(1.07);
+        }
+
+        #finalMessage {
+            display: none;
+            margin-top: 50px;
+            max-width: 700px;
+            animation: appear 1s ease;
+        }
+
+        #finalMessage h2 {
+            font-size: clamp(40px, 9vw, 80px);
+            font-weight: normal;
+            color: #f4a8d0;
+            margin-bottom: 25px;
+        }
+
+        #finalMessage p {
+            font-size: 20px;
+            line-height: 1.8;
+            color: #ddd;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: scale(.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+
+
+        .heart {
+            position: fixed;
+            bottom: -30px;
+            font-size: 20px;
+            animation: floatUp linear forwards;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        @keyframes floatUp {
+            to {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media(max-width: 600px) {
+            .photos {
+                grid-template-columns: 1fr;
+            }
+
+            .photo,
+            .photo:first-child {
+                height: 280px;
+                grid-row: auto;
+            }
+
+            .letter {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+
+
+<body>
+
+    <div id="belépés">
+        <button onclick="belépés()">Belépés ❤️</button>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="zene.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="bgMusic" loop>
+        <source src="zene.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const music = document.getElementById("bgMusic");
+        music.volume = 0.15;
+
+        document.addEventListener("click", () => {
+            music.play();
+        }, { once: true });
+    </script>
+
+
+    <script>
+        function belépés() {
+            const music = document.getElementById("bgMusic");
+            music.volume = 0.15;
+            music.play();
+
+            document.getElementById("belépés").style.display = "none";
+        }
+    </script>
+
+    <div class="glow"></div>
+
+    <!-- NYITÓOLDAL -->
+    <section class="hero">
+        <div class="small">egy kis meglepetés</div>
+
+        <h1>DORINA</h1>
+
+        <div class="subtitle">
+            Boldog névnapot! ❤️
+        </div>
+
+        <div class="scroll">
+            görgess lefelé ↓
+        </div>
+    </section>
+
+
+
+    <section>
+        <div class="content">
+
+            <div class="section-title">
+                Miért vagy különleges?
+            </div>
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="emoji">✨</div>
+                    <h3>A mosolyod</h3>
+                    <p>
+                        Van valami a mosolyodban, amitől még a legrosszabb nap is
+                        egy kicsit jobb lesz.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="emoji">🌷</div>
+                    <h3>Ahogy önmagad vagy</h3>
+                    <p>
+                        Nem kell megjátszanod magad. Pont úgy vagy különleges,
+                        ahogy vagy.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="emoji">❤️</div>
+                    <h3>Te magad</h3>
+                    <p>
+                        Egyszerűen csak azért, mert te vagy te.
+                        És ez önmagában elég.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- KÉPEK -->
+    <section>
+        <div class="content">
+
+            <div class="section-title">
+                Néhány kedvenc pillanat 📸
+            </div>
+
+            <div class="photos">
+
+                <!-- IDE TEDD AZ ELSŐ KÉPET -->
+                <div class="photo">
+                    Még nincs de lesz! ❤️
+                </div>
+
+                <!-- MÁSODIK -->
+                <div class="photo">
+                    Még nincs de lesz!❤️
+                </div>
+
+                <!-- HARMADIK -->
+                <div class="photo">
+                    Még nincs de lesz!❤️
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- LEVÉL -->
+    <section>
+        <div class="letter">
+
+
+            <h2>Kedves Dorina,</h2>
+
+            <p>
+                Ma nem csak azért szerettem volna írni neked, mert névnapod van,
+                hanem azért is, mert szeretném, ha tudnád, mennyire különleges
+                vagy számomra.
+            </p>
+
+            <p>
+                Remélem, hogy ma legalább annyit mosolyogsz, amennyit te adsz
+                másoknak a mosolyoddal. Megérdemled, hogy ez a nap rólad szóljon,
+                és hogy érezd, mennyire fontos vagy.
+            </p>
+
+            <p>
+                Köszönöm, hogy vagy nekem. Lehet, hogy most nem vagyunk együtt,
+                de az érzéseim irántad nem múltak el. És szeretném, ha tudnád,
+                hogy én továbbra is itt leszek, és várni fogok rád.
+            </p>
+
+            <p>
+                Nem tudom, mit hoz még nekünk az élet, de egy dolgot biztosan
+                tudok: bárhogy is alakuljon, mindig különleges helyed lesz
+                a szívemben. ❤️
+            </p>
+
+            <p>
+                Legyen ez a nap pont olyan különleges, mint amilyen te vagy.
+                Boldog névnapot, Dorina! 🌷
+            </p>
+
+            <div class="signature">
+                Öleléssel,<br>
+                <strong>Én ❤️</strong>
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <section class="surprise">
+
+        <div class="content">
+
+            <div class="section-title">
+                Van még valami...
+            </div>
+
+            <button onclick="showSurprise()">
+                Kattints rám ❤️
+            </button>
+
+            <div id="finalMessage">
+
+                <h2>Boldog névnapot, Dorina! 🎉</h2>
+
+                <p>
+                    Remélem, ez a kis oldal mosolyt csalt az arcodra.
+                    És ha csak egyetlen dolgot jegyzel meg belőle, akkor legyen ez:
+                </p>
+
+                <p style="margin-top:25px; font-size:25px;">
+                    <strong>Nagyon fontos vagy nekem. ❤️</strong>
+                </p>
+
+                <img src="dorina.jpg" class="final-photo" alt="">
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <script>
+
+        function showSurprise() {
+
+            const message = document.getElementById("finalMessage");
+
+            message.style.display = "block";
+
+            for (let i = 0; i < 40; i++) {
+                setTimeout(createHeart, i * 80);
+            }
+
+
+            setTimeout(() => {
+                message.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+            }, 200);
+        }
+
+
+        function createHeart() {
+
+            const heart = document.createElement("div");
+
+            heart.className = "heart";
+
+            const hearts = ["❤️", "💗", "💕", "💖", "✨"];
+
+            heart.innerText =
+                hearts[Math.floor(Math.random() * hearts.length)];
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.animationDuration =
+                (3 + Math.random() * 4) + "s";
+
+            heart.style.fontSize =
+                (15 + Math.random() * 25) + "px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+
+    </script>
+
+</body>
+<p>Make the web: BRJ.</p>
+
+</html>
